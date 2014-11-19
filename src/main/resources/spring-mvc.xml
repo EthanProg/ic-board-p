@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/mvc 	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 
 	<!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-	<context:component-scan base-package="com.zhsw" />
+	<context:component-scan base-package="com.ic" />
 	
 	<!-- ②：注解驱动，使spring的controller全部生效 -->
 	<mvc:annotation-driven />
@@ -22,9 +22,6 @@
 		<property name="prefix" value="/webpage" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<!-- 全局异常处理，自定义实现异常接口（此种方式更好用） -->
-	<bean id="exceptionResolver" class="com.zhsw.common.exception.ExceptionHandler" />
 
 	
 </beans>
