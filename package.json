@@ -1,0 +1,31 @@
+{
+  "name": "ic-board",
+  "version": "0.0.1",
+  "description": "取集成电路板的意思。希望它能集成各种各样的功能，但是还能保持微小、高效、简单的特性，拭目以待吧！",
+  "repository": {
+    "type": "git",
+    "url": "https://git.oschina.net/charlessong/ic-board.git"
+  },
+  "keywords": [
+    "ic-board"
+  ],
+  "bugs": {
+    "url": "https://git.oschina.net/charlessong/ic-board/issues",
+    "email": "Charles2Song@gmail.com"
+  },
+  "author": "CharlesSong",
+  "license": "Apache License 2.0",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-bowercopy": "^1.2.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-qunit": "~0.5.2",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}
