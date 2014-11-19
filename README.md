@@ -10,8 +10,8 @@
 
 
 ##编码规范
-[腾讯前端编码规范](http://alloyteam.github.io/code-guide/)
-[Google Java 编码规范](http://google-styleguide.googlecode.com/svn/trunk/javaguide.html) [中文翻译版](http://www.cnblogs.com/lanxuezaipiao/p/3534447.html)
+* [腾讯前端编码规范](http://alloyteam.github.io/code-guide/)
+* [Google Java 编码规范](http://google-styleguide.googlecode.com/svn/trunk/javaguide.html) [中文翻译版](http://www.cnblogs.com/lanxuezaipiao/p/3534447.html)
 
 
 ##前端包管理、构建
