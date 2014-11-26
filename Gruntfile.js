@@ -108,6 +108,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
 
 
+
   // Default task.默认任务，执行grunt并不指定具体任务时会执行默认
   grunt.registerTask('default', ['bower','jshint', 'qunit', 'concat', 'uglify']);
 
