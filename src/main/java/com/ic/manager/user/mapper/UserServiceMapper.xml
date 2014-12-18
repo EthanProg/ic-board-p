@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.manager.user.mapper.UserServiceMapper">
+	<resultMap id="user" type="com.ic.manager.user.model.User">
+		<result column="user_id" property="userId"></result>
+		<result column="user_name" property="userName"></result>
+		<result column="user_sex" property="userSex"></result>
+		<result column="user_born" property="userBorn"></result>
+		<result column="user_mail" property="userMail"></result>
+		<result column="register_time" property="registerTime"></result>
+		<result column="last_time" property="lastTime"></result>
+		<result column="user_pass" property="userPass"></result>
+		<result column="user_question" property="userQuestion"></result>
+		<result column="user_answer" property="userAnswer"></result>
+		<result column="user_addr" property="userAddr"></result>
+		<result column="login_times" property="loginTimes"></result>
+		<result column="com_id" property="comId"></result>
+		<result column="user_phone" property="userPhone"></result>
+		<result column="user_status" property="userStatus"></result>
+	</resultMap>
+
+
+	<select id="queryUserList" resultType="map" parameterType="map">
+		select * from ic_user
+	</select>
+
+	<select id="queryUser" resultType="map" parameterType="map">
+		select * from ic_user
+		<where>
+			<if test="userId!=null and userId!=''">
+				user_id=#{userId}
+			</if>
+		</where>
+	</select>
+
+</mapper>
