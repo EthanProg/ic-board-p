@@ -4,8 +4,12 @@ package com.ic.core.impl;
 import com.ic.core.enums.LogLevel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.context.ContextLoader;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description:所有Controller的基类
@@ -15,7 +19,23 @@ import java.io.Serializable;
  * Date  : 2014/12/16
  */
 public abstract class CoreController implements Serializable {
+
     private Log log = LogFactory.getLog(this.getClass().getName());
+
+    /**
+     * 作为返回值
+     */
+    protected Map<String,Object> returnMap ;
+
+    /**
+     * 最为参数对象
+     */
+    protected Map<String,Object> params ;
+
+    protected void  execute(){
+        returnMap=new HashMap<String, Object>();
+        params=new HashMap<String, Object>();
+    }
 
     /**
      * 功能：输出日志信息，每个Controller中不必再次获得Log对象
