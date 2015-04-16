@@ -3,24 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ic.manager.user.mapper.UserServiceMapper">
-	<resultMap id="user" type="com.ic.manager.user.model.User">
-		<result column="user_id" property="userId"></result>
-		<result column="user_name" property="userName"></result>
-		<result column="user_sex" property="userSex"></result>
-		<result column="user_born" property="userBorn"></result>
-		<result column="user_mail" property="userMail"></result>
-		<result column="register_time" property="registerTime"></result>
-		<result column="last_time" property="lastTime"></result>
-		<result column="user_pass" property="userPass"></result>
-		<result column="user_question" property="userQuestion"></result>
-		<result column="user_answer" property="userAnswer"></result>
-		<result column="user_addr" property="userAddr"></result>
-		<result column="login_times" property="loginTimes"></result>
-		<result column="com_id" property="comId"></result>
-		<result column="user_phone" property="userPhone"></result>
-		<result column="user_status" property="userStatus"></result>
-	</resultMap>
-
 
 	<select id="queryUserList" resultType="map" parameterType="map">
 		select * from ic_user
@@ -29,10 +11,77 @@
 	<select id="queryUser" resultType="map" parameterType="map">
 		select * from ic_user
 		<where>
-			<if test="userId!=null and userId!=''">
-				user_id=#{userId}
+			1=1
+			<if test="user_id!=null and user_id!=''">
+				and user_id=#{user_id}
+			</if>
+			<if test="user_email!=null and user_email!=''">
+				and user_email=#{user_email}
 			</if>
 		</where>
 	</select>
+	
+	<insert id="addUser" parameterType="map">
+		insert into ic_user
+		(user_id, family_name, user_pw, user_sex, user_born, user_email, user_question, user_answer, register_time, last_time, isenable, firstname, user_name, fullname, user_phone, login_times)
+		values
+		(#{user_id,jdbcType=VARCHAR},#{family_name,jdbcType=VARCHAR},#{user_pw,jdbcType=VARCHAR},#{user_sex,jdbcType=CHAR},#{user_born,jdbcType=TIMESTAMP},#{user_email,jdbcType=VARCHAR},
+		#{user_question,jdbcType=VARCHAR},#{user_answer,jdbcType=VARCHAR},#{register_time,jdbcType=TIMESTAMP},#{last_time,jdbcType=TIMESTAMP},#{isenable,jdbcType=CHAR},#{firstname,jdbcType=VARCHAR},
+		#{user_name,jdbcType=VARCHAR},#{fullname,jdbcType=VARCHAR},#{user_phone,jdbcType=VARCHAR},#{login_times,jdbcType=INTEGER})
+	</insert>
+
+	<update id="updateUser" parameterType="map">
+		update ic_user
+		<set>
+			<if test="family_name!=null">
+				family_name=#{family_name,jdbcType=VARCHAR}
+			</if>
+			<if test="user_pw!=null">
+				,user_pw=#{user_pw,jdbcType=VARCHAR}
+			</if>
+			<if test="user_sex!=null">
+				,user_sex=#{user_sex,jdbcType=CHAR}
+			</if>
+			<if test="user_born!=null">
+				,user_born=#{user_born,jdbcType=TIMESTAMP}
+			</if>
+			<if test="user_email!=null">
+				,user_email=#{user_email,jdbcType=VARCHAR}
+			</if>
+			<if test="user_question!=null">
+				,user_question=#{user_question,jdbcType=VARCHAR}
+			</if>
+			<if test="user_answer!=null">
+				,user_answer=#{user_answer,jdbcType=VARCHAR}
+			</if>
+			<if test="isenable!=null">
+				,isenable=#{isenable,jdbcType=CHAR}
+			</if>
+			<if test="firstname!=null">
+				,firstname=#{firstname,jdbcType=VARCHAR}
+			</if>
+			<if test="user_name!=null">
+				,user_name=#{user_name,jdbcType=VARCHAR}
+			</if>
+			<if test="fullname!=null">
+				,fullname=#{fullname,jdbcType=VARCHAR}
+			</if>
+
+			<if test="user_phone!=null">
+				,user_phone=#{user_phone,jdbcType=VARCHAR}
+			</if>
+
+			<if test="login_times!=null">
+				,login_times=login_times+1
+			</if>
+		</set>
+		<where>
+			user_id=#{user_id,jdbcType=VARCHAR}
+		</where>
+	</update>
+
+	<delete id="deleteUser" parameterType="map">
+		delete from ic_user where user_id=#{user_id}
+	</delete>
 
 </mapper>
