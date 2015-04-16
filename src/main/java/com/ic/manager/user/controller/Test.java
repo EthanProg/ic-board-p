@@ -28,6 +28,10 @@ public class Test extends CoreController{
         return "/test";
     }
 
+
+
+
+
     @RequestMapping("/test")
     public String userList(HttpServletRequest req){
         //后台连接直接获取
