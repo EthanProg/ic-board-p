@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.manager.advertise.mapper.AdvertiseServiceMapper">
+
+    <select id="queryAdvertiseList" resultType="map" parameterType="map">
+        select * from ic_advertise_info
+    </select>
+
+    <select id="queryAdvertise" resultType="map" parameterType="map">
+
+    </select>
+
+    <insert id="addAdvertise" parameterType="map">
+
+    </insert>
+
+    <update id="updateAdvertise" parameterType="map">
+
+    </update>
+
+    <delete id="deleteAdvertise" parameterType="map">
+
+    </delete>
+
+    <select id="queryAdvertiseUnitList" resultType="map" parameterType="map">
+        select * from ic_advertise_unit
+    </select>
+
+    <select id="queryAdvertiseUnit" resultType="map" parameterType="map">
+
+    </select>
+
+    <insert id="addAdvertiseUnit" parameterType="map">
+
+    </insert>
+
+    <update id="updateAdvertiseUnit" parameterType="map">
+
+    </update>
+
+    <delete id="deleteAdvertiseUnit" parameterType="map">
+
+    </delete>
+
+</mapper>
