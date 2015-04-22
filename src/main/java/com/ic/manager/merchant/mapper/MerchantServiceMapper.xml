@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.manager.merchant.mapper.MerchantServiceMapper">
+
+    <select id="queryMerchantList" resultType="map" parameterType="map">
+        select * from ic_merchant
+    </select>
+
+    <select id="queryMerchant" resultType="map" parameterType="map">
+
+    </select>
+
+    <insert id="addMerchant" parameterType="map">
+
+    </insert>
+
+    <update id="updateMerchant" parameterType="map">
+
+    </update>
+
+    <delete id="deleteMerchant" parameterType="map">
+
+    </delete>
+
+</mapper>
