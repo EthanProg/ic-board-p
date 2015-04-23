@@ -109,9 +109,21 @@ create table t_tasks(
    rule_id varchar(32) not null,
    rule_name varchar(32) not null,
    rule_content varchar(256),/*规则内容*/
-   rule_class varchar(64),/*解析规则的类;这样每次有心的规则，只要调用这个解析类就行。这个解析类应该有专门的父类以及固定的方法*/
+   rule_class varchar(64),/*解析规则的类;这样每次有心的规则，只要调用这个解析类就行。这个解析类应该有专门的父类以及固定的方法；
+   但是对于今天邀请3个人；明天改为邀请5个，1个的怎么办呢？设计一个规则参数扩展表，在规则中插入特殊化的参数，到解析类中解析这个参数*/
    primary key(rule_id)
  );
+
+/**
+任务规则扩展表，需要设计一个专门的工具类进行解析此内容；并固定一些常用的参数。
+这些参数应该放到缓存中，并可刷新
+ */
+ create table t_task_rule_expand{
+    param_name varchar(32) not null,/*特殊格式的参数，比如：{{invite_reg_num}}邀请注册的个数*/
+    param_desc varchar(32) not null,/*参数说明*/
+    note varchar(64),
+    primary key (param_name);/*参数必须唯一*/
+ }
 
 
 
