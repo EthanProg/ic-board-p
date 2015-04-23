@@ -2,6 +2,27 @@
 mysql建表语句
  */
 
+ /*字典表（枚举表）*/
+ create table t_dict(
+    dict_id varchar(32) not null,
+    dict_name varchar(32) not null,
+    dict_key varchar(32) not null,
+    dict_value varchar(32) not null,
+    note varchar(64),
+    primary key(dict_id,dict_key)
+ );
+
+ /**
+ 全国地市、区县表
+  */
+create table t_citys(
+   city_id varchar(8) not null,
+   city_name varchar(32) not null,
+   city_type char(1) not null,
+   parent_id varchar(8) not null,
+   primary KEY (city_id)
+)
+
 /**
 用户表
  */
@@ -54,6 +75,8 @@ create table t_sectors(
   task_num int DEFAULT 9,/*板块下任务数*/
   sector_type varchar(4),/*板块类型,此处是编码，应该在枚举表中定义所有类型*/
   sector_status char(2),/*板块状态*/
+  sector_desc varchar(128),/*板块描述*/
+  sector_pic varchar(64),
   crt_time TIMESTAMP ,/*创建时间*/
   primary key (sector_id)
 );
@@ -70,7 +93,8 @@ create table t_tasks(
   task_rule varchar(32),/*任务规则；定义一个规则的工具集，处理每个规则，比如：注册邀请3人的平台任务，在处理用户任务时，调用次规则方法；每增加一个规则就需要增加一个规则方法；定义成可配置的*/
   task_status char(2),/*00:未发布；01:发布；02:锁定；03:完成*/
   task_score integer,/*任务积分*/
-  appointment_num integer,/*预约号码，如果任务非常紧张，当商家发布任务时，进入排对队列*/
+  task_content blob,/*任务内容，图文结合的html字符串*/
+  appointment_num integer,/*预约号码，如果任务非常紧张，当商家发布任务时，进入排对队列(是否还需要一个对列表呢？)*/
   start_time TIMESTAMP ,/*任务开始时间*/
   stop_time TIMESTAMP ,/*任务结束时间*/
   crt_time TIMESTAMP ,/*创建时间*/
