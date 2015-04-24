@@ -6,10 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.ic.core.model.CodeModel;
+import com.ic.core.model.Code;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.aspectj.apache.bcel.classfile.Code;
 
 /**
  *功能：JSON转换工具类
@@ -74,9 +73,9 @@ public class JSONUtil {
                     map.put(k.toString(), v);
                 }
             }
-            map.put("code", CodeModel.CODE_SUCCESS);
+            map.put("code", Code.SUCCESS);
         }catch (Exception e){
-            map.put("code", CodeModel.CODE_CONVERT_FAILURE);
+            map.put("code", Code.DATA_FORMAT_INVALID);
             map.put("msg","数据格式错误");
         }
         return map;
