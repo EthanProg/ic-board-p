@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,6 +84,12 @@ public abstract class CoreController implements Serializable {
 
     protected String renderData(String code,String msg, Map<String,Object> data) {
         DataResponse dr=new DataResponse(code,msg,data);
+        dr.setTranstime(null);
+        return renderString(JsonMapper.toJsonString(dr), "application/json");
+    }
+
+    protected String renderData(String code,String msg, List<Map<String,Object>> datas) {
+        DataResponse dr=new DataResponse(code,msg,datas);
         dr.setTranstime(null);
         return renderString(JsonMapper.toJsonString(dr), "application/json");
     }
