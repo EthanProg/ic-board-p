@@ -1,5 +1,6 @@
 package com.ic.core.model;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Map;
  */
 public class DataResponse extends BaseResponse {
     private Map<String,Object> data;
+    private List<Map<String,Object>> data_list;
 
     public DataResponse(Map data){
         super();
@@ -23,6 +25,11 @@ public class DataResponse extends BaseResponse {
         this.data=data;
     }
 
+    public DataResponse(String code,String msg,List<Map<String,Object>> data_list){
+        super(code,msg);
+        this.data_list=data_list;
+    }
+
     public Map<String, Object> getData() {
         return data;
     }
@@ -35,5 +42,15 @@ public class DataResponse extends BaseResponse {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public List<Map<String, Object>> getData_list()
+    {
+        return data_list;
+    }
+
+    public void setData_list(List<Map<String, Object>> data_list)
+    {
+        this.data_list = data_list;
     }
 }
