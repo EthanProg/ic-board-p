@@ -3,15 +3,13 @@ package com.ic.modules.merchant.controller;
 import com.ic.core.impl.CoreController;
 import com.ic.core.model.Code;
 import com.ic.modules.merchant.service.IMerchantService;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by xjw on 2015/4/26.
@@ -29,9 +27,20 @@ public class MerchantController extends CoreController
     {
         System.out.println("测试一下，嘿嘿");
         Map<String,Object> data = new HashMap<String,Object>();
-        data.put("merchant_id", "111");
-        data.put("merchant_name", "inspur");
-        renderData("000", "成功", data);
+        List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+        Map<String,Object> temp1 = new HashMap<String,Object>();
+        Map<String,Object> temp2 = new HashMap<String,Object>();
+        temp1.put("merchant_id", "111");
+        temp1.put("merchant_name", "111");
+        temp2.put("merchant_id", "222");
+        temp2.put("merchant_name", "222");
+        list.add(temp1);
+        list.add(temp2);
+        data.put("data", list);
+        data.put("code", "000");
+        data.put("msg", "成功");
+        data.put("transtime" , DateFormatUtils.format(new Date(), "yyyyMMdd hh:mm:ss:SSS"));
+        this.renderString(data);
     }
 
     @RequestMapping(value = "/queryMerchants")
@@ -39,7 +48,9 @@ public class MerchantController extends CoreController
     {
         String code = Code.SUCCESS;
         String msg = Code.SUCCESS_MSG;
-        List<Map<String,Object>> data_list = new ArrayList<Map<String, Object>>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        List<Map<String, Object>> data_list = new ArrayList<Map<String, Object>>();
+        data.put("data", data_list);
         try
         {
             data_list = merchantService.queryMerchantList(this.param_map);
@@ -50,7 +61,10 @@ public class MerchantController extends CoreController
             code = Code.FAIL;
             msg = e.getMessage();
         }
-        renderData(code, msg, data_list);
+        data.put("code", code);
+        data.put("msg", msg);
+        data.put("transtime" , DateFormatUtils.format(new Date(), "yyyyMMdd hh:mm:ss:SSS"));
+        renderString(data);
     }
 
     @RequestMapping(value = "/queryMerchant")
