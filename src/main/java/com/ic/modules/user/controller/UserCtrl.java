@@ -15,6 +15,6 @@ public class UserCtrl extends CoreController {
     @RequestMapping("/list")
     public void list(){
         System.out.println("这是user list");
-        logDebug("这是user list ");
+        debug("这是user list ");
     }
 }
