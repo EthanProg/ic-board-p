@@ -88,11 +88,6 @@ public abstract class CoreController implements Serializable {
         return renderString(JsonMapper.toJsonString(dr), "application/json");
     }
 
-    protected String renderData(String code,String msg, List<Map<String,Object>> datas) {
-        DataResponse dr=new DataResponse(code,msg,datas);
-        dr.setTranstime(null);
-        return renderString(JsonMapper.toJsonString(dr), "application/json");
-    }
 
     /**
      * 客户端返回字符串
