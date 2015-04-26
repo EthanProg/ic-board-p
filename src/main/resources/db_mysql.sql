@@ -30,6 +30,7 @@ create table t_users(
   user_id varchar(32) not null,
   user_name varchar(32) not null,
   user_pwd  varchar(32) not null,
+  nickname varchar(32),/*别名*/
   sex char(1),
   tel_number varchar(16),
   city_id char(4),
@@ -38,6 +39,7 @@ create table t_users(
   county_id char(4),
   user_addr varchar(128),
   email varchar(64),
+  inviter varchar(32),/*邀请人*/
   reg_time TIMESTAMP ,
   primary key(user_id)
 );
@@ -118,12 +120,12 @@ create table t_tasks(
 任务规则扩展表，需要设计一个专门的工具类进行解析此内容；并固定一些常用的参数。
 这些参数应该放到缓存中，并可刷新
  */
- create table t_task_rule_expand{
+ create table t_task_rule_expand(
     param_name varchar(32) not null,/*特殊格式的参数，比如：{{invite_reg_num}}邀请注册的个数*/
     param_desc varchar(32) not null,/*参数说明*/
     note varchar(64),
     primary key (param_name);/*参数必须唯一*/
- }
+ )
 
 
 
