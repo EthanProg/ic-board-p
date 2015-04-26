@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.manager.merchant.mapper.MerchantServiceMapper">
+
+    <select id="queryMerchant" resultType="list" parameterType="map">
+        SELEC * FROM t_merchants where merchant_id = #{merchant_id}
+    </select>
+
+    <select id="queryMerchantList" resultType="map" parameterType="map">
+        <![CDATA[
+          SELECT * FROM t_merchants
+            <where>
+              <if test="merchant_id != null || merchant_id != ''">
+                merchant_id = #{merchant_id}
+              </if>
+
+              <if test="merchant_name != null || merchant_name != ''">
+                and instr(merchant_name, #{merchant_name}) > 0
+              </if>
+
+              <if test="short_name != null || short_name != ''">
+                and instr(short_name, #{short_name})> 0
+              </if>
+
+              <if test="tel_number != null || tel_number != ''">
+                 and tel_number = #{tel_number}
+              </if>
+
+              <if test="merchant_type != null || merchant_type != ''">
+                and merchant_type = #{merchant_type}
+              </if>
+
+              <if test="merchant_principal != null || merchant_principal != ''">
+                and merchant_principal = #{merchant_principal}
+              </if>
+            </where>
+        ]]>
+    </select>
+
+    <insert id="addMerchant" parameterType="map">
+      <![CDATA[
+          INSERT INTO
+          t_merchants (merchant_id, merchant_name, short_name, tel_number, merchant_pwd, merchant_type, merchant_principal, reg_time)
+          values (#{merchant_id,jdbcType=VARCHAR},#{merchant_name,jdbcType=VARCHAR},#{short_name,jdbcType=VARCHAR},#{tel_number,jdbcType=VARCHAR},
+          #{merchant_pwd,jdbcType=VARCHAR},#{merchant_type,jdbcType=VARCHAR},#{merchant_principal,jdbcType=VARCHAR},#{reg_time,jdbcType=TIMESTAMP})
+        ]]>
+    </insert>
+
+    <update id="updateMerchant" parameterType="map">
+      <![CDATA[
+        UPDATE t_merchants
+          <set>
+            <if test="merchant_name != null || merchant_name != ''">
+              merchant_name = #{merchant_name},
+            </if>
+
+            <if test="short_name != null || short_name != ''">
+              short_name = #{short_name},
+            </if>
+
+            <if test="tel_number != null || tel_number != ''">
+             tel_number = #{tel_number},
+            </if>
+
+            <if test="merchant_type != null || merchant_type != ''">
+              merchant_type = #{merchant_type},
+            </if>
+
+            <if test="merchant_principal != null || merchant_principal != ''">
+              merchant_principal = #{merchant_principal}
+            </if>
+          </set>
+        WHERE merchant_id = #{merchant_id}
+      ]]>
+    </update>
+
+    <!--删除操作是否可以修改为更新一个标志位-->
+    <delete id="deleteMerchant" parameterType="map">
+      <![CDATA[
+        DELETE t_merchants WHERE merchant_id = #{merchant_id}
+      ]]>
+    </delete>
+
+</mapper>
