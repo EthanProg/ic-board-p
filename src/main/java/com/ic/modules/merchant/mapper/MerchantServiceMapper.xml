@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ic.manager.merchant.mapper.MerchantServiceMapper">
+<mapper namespace="com.ic.modules.merchant.mapper.MerchantServiceMapper">
 
     <select id="queryMerchant" resultType="list" parameterType="map">
         SELEC * FROM t_merchants where merchant_id = #{merchant_id}
