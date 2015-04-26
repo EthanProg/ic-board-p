@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by xjw on 2015/4/22.
  */
-@Service("MerchantService")
+@Service("merchantService")
 public class MerchantServiceImpl implements IMerchantService
 {
     @Autowired
