@@ -4,6 +4,8 @@ package com.ic.core.impl;
 import com.ic.core.enums.LogLevel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ContextLoader;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,45 +22,28 @@ import java.util.Map;
  */
 public abstract class CoreController implements Serializable {
 
-    private Log log = LogFactory.getLog(this.getClass().getName());
-
     /**
-     * 作为返回值
+     * 日志对象
      */
-    protected Map<String,Object> returnMap ;
+    protected Logger log = LoggerFactory.getLogger(getClass());
 
-    /**
-     * 最为参数对象
-     */
-    protected Map<String,Object> params ;
 
-    protected void  execute(){
-        returnMap=new HashMap<String, Object>();
-        params=new HashMap<String, Object>();
-    }
-
-    /**
-     * 功能：输出日志信息，每个Controller中不必再次获得Log对象
-     * @param logLevel 要输出的日志级别
-     * @param obj 要输出的日志内容
-     */
-    public void logMessage(LogLevel logLevel,Object obj){
-        switch (logLevel){
-            case DEBUG:
-                log.debug(obj);
-                break;
-            case INFO:
-                log.info(obj);
-                break;
-            case WARN:
-                log.warn(obj);
-                break;
-            case TRACE:
-                log.trace(obj);
-                break;
-            case ERROR:
-                log.error(obj);
-                break;
+    public void debug(String string){
+        if(log.isDebugEnabled()){
+            log.debug(string);
         }
     }
+
+    public void info(String string) {
+        if (log.isInfoEnabled()) {
+            log.info(string);
+        }
+    }
+
+    public void error(String string) {
+        if (log.isErrorEnabled()) {
+            log.error(string);
+        }
+    }
+
 }
