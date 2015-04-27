@@ -1,20 +1,20 @@
-package com.ic.core.impl;
+package com.ic.core.base;
 
 
-import com.ic.core.enums.LogLevel;
 import com.ic.core.mapper.JsonMapper;
 import com.ic.core.model.DataResponse;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.ic.core.utils.DateUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.ContextLoader;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -25,30 +25,6 @@ import java.util.Map;
  * Date  : 2014/12/16
  */
 public abstract class CoreController implements Serializable {
-
-    /**
-     * 日志对象
-     */
-    protected Logger log = LoggerFactory.getLogger(getClass());
-
-
-    public void debug(String string){
-        if(log.isDebugEnabled()){
-            log.debug(string);
-        }
-    }
-
-    public void info(String string) {
-        if (log.isInfoEnabled()) {
-            log.info(string);
-        }
-    }
-
-    public void error(String string) {
-        if (log.isErrorEnabled()) {
-            log.error(string);
-        }
-    }
 
     /**
      * 客户端返回JSON字符串
