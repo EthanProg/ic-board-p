@@ -31,6 +31,7 @@ public class AdvertiseServiceImpl implements IAdvertiseService
         return advertiseServiceMapper.queryAdvertiseList(param_map);
     }
 
+
     @Override
     public Map<String, Object> addAdvertise(Map<String, Object> param_map)
     {
