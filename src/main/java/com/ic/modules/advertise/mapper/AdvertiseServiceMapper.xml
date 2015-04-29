@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.modules.advertise.mapper.AdvertiseServiceMapper">
+
+    <select id="queryAdvertiseList" resultType="map" parameterType="map">
+        <![CDATA[
+          SELECT * FROM t_advertises WHERE stateflag=0 AND advertise_id = #{advertise_id}
+        ]]>
+    </select>
+
+    <select id="queryAdvertise" resultType="map" parameterType="map">
+        <![CDATA[
+          SELECT * FROM t_advertises
+          <WHERE>
+            stateflag = 0
+
+            <if test="advertise_id != null && advertise_id != ''">
+              AND advertise_id = #{advertise_id}
+            </if>
+
+            <if test="advertise_name != null && advertise_name != ''">
+              AND instr(advertise_name, #{advertise_name}) > 0
+            </if>
+
+            <if test="merchant_id != null && merchant_id != ''">
+              AND merchant_id = #{merchant_id}
+            </if>
+
+            <if test="sector_id != null && sector_id != ''">
+              AND sector_id = #{sector_id}
+            </if>
+
+          </WHERE>
+
+          <ORDER>
+            advertise_name
+          </ORDER>
+        ]]>
+    </select>
+
+    <insert id="addAdvertise" parameterType="map">
+      <![CDATA[
+          INSERT INTO t_advertises
+          (advertise_id, advertise_name, advertise_name, merchant_id, sector_id)
+          VALUES (#{advertise_id,jdbcType=VARCHAR},#{advertise_name,jdbcType=VARCHAR},
+          #{advertise_name,jdbcType=VARCHAR},#{merchant_id,jdbcType=VARCHAR},
+          #{sector_id,jdbcType=VARCHAR})
+        ]]>
+    </insert>
+
+    <update id="updateAdvertise" parameterType="map">
+      <![CDATA[
+        UPDATE t_advertises
+        <SET>
+
+          <if test="advertise_name">
+            advertise_name = #{advertise_name},
+          </if>
+
+          <if test="merchant_id">
+            merchant_id = #{merchant_id},
+          </if>
+
+          <if test="sector_id">
+            sector_id = #{sector_id}
+          </if>
+
+        </SET>
+
+        <WHERE>
+          stateflag=0 AND advertise_id = #{advertise_id}
+        </WHERE>
+      ]]>
+    </update>
+
+    <delete id="deleteAdvertise" parameterType="map">
+      <![CDATA[
+        UPDATE t_advertises SET stateflag=0 WHERE stateflag=0 AND advertise_id=#{advertise_id}
+      ]]>
+    </delete>
+</mapper>

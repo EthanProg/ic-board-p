@@ -1,4 +1,4 @@
-package com.ic.manager.advertise.mapper;
+package com.ic.modules.advertise.mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -42,15 +42,4 @@ public interface AdvertiseServiceMapper
      * @return
      */
     public Integer deleteAdvertise(Map<String, Object> params);
-
-    public List<Map<String,Object>> queryAdvertiseUnitList(Map<String,Object> params);
-
-    public Map<String,Object> queryAdvertiseUnit(Map<String,Object> params);
-
-    public Integer addAdvertiseUnit(Map<String,Object> params);
-
-    public Integer deleteAdvertiseUnit(Map<String,Object> params);
-
-    public Integer updateAdvertiseUnit(Map<String,Object> params);
-
 }
