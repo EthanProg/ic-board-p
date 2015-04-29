@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
-http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache" xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-3.0.xsd
-">
+http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<!-- 引入属性文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
+    <!-- 属性文件读入 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:thread.properties</value>
+            </list>
+        </property>
+    </bean>
+
 	<!-- service包(自动注入) -->
 	<context:component-scan base-package="com.ic" />
+
+    <!-- 根据beanName获取bean实例的工具类 -->
+    <bean id="springContextUtil" class="com.ic.core.utils.SpringContextHolder"/>
+
+    <!-- 缓存配置 -->
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:cache/ehcache-local.xml"/>
+    </bean>
+
+    <!-- 线程池 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${threadpool.corePoolSize}"/>
+        <property name="keepAliveSeconds" value="${threadpool.keepAliveSeconds}"/>
+        <property name="maxPoolSize" value="${threadpool.maxPoolSize}"/>
+        <property name="queueCapacity" value="${threadpool.queueCapacity}"/>
+    </bean>
 
 </beans>

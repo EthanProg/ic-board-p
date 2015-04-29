@@ -9,17 +9,27 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
        http://www.springframework.org/schema/mvc 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-	<context:component-scan base-package="com.ic" />
+    <!-- Spring容器优先加载由ServletContextListener（对应applicationContext.xml）产生的父容器，
+         而SpringMVC（对应mvc_dispatcher_servlet.xml）产生的是子容器。
+         子容器Controller进行扫描装配时装配的@Service注解的实例是没有经过事务加强处理，
+         即没有事务处理能力的Service，而父容器进行初始化的Service是保证事务的增强处理能力的。
+         如果不在子容器中将Service exclude掉，此时得到的将是原样的无事务处理能力的Service。 -->
+    <context:component-scan base-package="com.ic">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 
 	<context:annotation-config />
 
 	<!-- ②：注解驱动，使spring的controller全部生效 -->
 	<mvc:annotation-driven/>
 
+    <mvc:interceptors>
+        <bean class="com.ic.core.interceptors.TokenInterceptor"/>
+    </mvc:interceptors>
 
-	<!-- ③：默认的视图解析器 在上边的解析错误时使用 (默认使用html);对模型视图名称的解析，即在模型视图名称添加前后缀 viewClass：JstlView表示JSP模板页面需要使用JSTL标签库，classpath中必须包含jstl的相关jar包；
-		prefix和suffix：查找视图页面的前缀和后缀（前缀[逻辑视图名]后缀），比如传进来的逻辑视图名为hello，则该该jsp视图页面应该存放在“WEB-INF/webpage/hello.jsp”； -->
+
+    <!-- ③：默认的视图解析器 在上边的解析错误时使用 (默认使用html);对模型视图名称的解析，即在模型视图名称添加前后缀 viewClass：JstlView表示JSP模板页面需要使用JSTL标签库，classpath中必须包含jstl的相关jar包；
+        prefix和suffix：查找视图页面的前缀和后缀（前缀[逻辑视图名]后缀），比如传进来的逻辑视图名为hello，则该该jsp视图页面应该存放在“WEB-INF/webpage/hello.jsp”； -->
 	<bean id="defaultViewResolver"
 		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
