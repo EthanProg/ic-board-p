@@ -1,6 +1,6 @@
 package com.ic.modules.merchant.controller;
 
-import com.ic.core.impl.CoreController;
+import com.ic.core.base.CoreController;
 import com.ic.core.model.Code;
 import com.ic.modules.merchant.service.IMerchantService;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -40,7 +40,7 @@ public class MerchantController extends CoreController
         data.put("code", "000");
         data.put("msg", "成功");
         data.put("transtime" , DateFormatUtils.format(new Date(), "yyyyMMdd hh:mm:ss:SSS"));
-        this.renderString(data);
+        //this.renderString(data);
     }
 
     @RequestMapping(value = "/queryMerchants")
@@ -53,7 +53,7 @@ public class MerchantController extends CoreController
         data.put("data", data_list);
         try
         {
-            data_list = merchantService.queryMerchantList(this.param_map);
+            data_list = merchantService.queryMerchantList(this.paramMap);
         }
         catch(Exception e)
         {
@@ -64,7 +64,7 @@ public class MerchantController extends CoreController
         data.put("code", code);
         data.put("msg", msg);
         data.put("transtime" , DateFormatUtils.format(new Date(), "yyyyMMdd hh:mm:ss:SSS"));
-        renderString(data);
+        //renderString(data);
     }
 
     @RequestMapping(value = "/queryMerchant")
@@ -75,7 +75,7 @@ public class MerchantController extends CoreController
         Map<String,Object> data_map = new HashMap<String, Object>();
         try
         {
-            data_map = merchantService.queryMerchant(this.param_map);
+            data_map = merchantService.queryMerchant(this.paramMap);
         }
         catch(Exception e)
         {
@@ -83,7 +83,7 @@ public class MerchantController extends CoreController
             code = Code.FAIL;
             msg = e.getMessage();
         }
-        renderData(code, msg, data_map);
+        //renderData(code, msg, data_map);
     }
 
     @RequestMapping(value = "/addMerchant")
@@ -93,7 +93,7 @@ public class MerchantController extends CoreController
         String msg = Code.SUCCESS_MSG;
         try
         {
-            Map<String,Object> ret_map = merchantService.addMerchant(this.param_map);
+            Map<String,Object> ret_map = merchantService.addMerchant(this.paramMap);
             code = String.valueOf(ret_map.get("code"));
             msg = String.valueOf(ret_map.get("msg"));
         }
@@ -103,7 +103,7 @@ public class MerchantController extends CoreController
             code = Code.FAIL;
             msg = e.getMessage();
         }
-        renderData(code, msg, new HashMap<String,Object>());
+        //renderData(code, msg, new HashMap<String,Object>());
     }
 
     @RequestMapping(value = "/updateMerchant")
@@ -113,7 +113,7 @@ public class MerchantController extends CoreController
         String msg = Code.SUCCESS_MSG;
         try
         {
-            Map<String,Object> ret_map = merchantService.updateMerchant(this.param_map);
+            Map<String,Object> ret_map = merchantService.updateMerchant(this.paramMap);
             code = String.valueOf(ret_map.get("code"));
             msg = String.valueOf(ret_map.get("msg"));
         }
@@ -123,7 +123,7 @@ public class MerchantController extends CoreController
             code = Code.FAIL;
             msg = e.getMessage();
         }
-        renderData(code, msg, new HashMap<String,Object>());
+        //renderData(code, msg, new HashMap<String,Object>());
     }
 
     @RequestMapping(value = "/deleteMerchant")
@@ -133,7 +133,7 @@ public class MerchantController extends CoreController
         String msg = Code.SUCCESS_MSG;
         try
         {
-            Map<String,Object> ret_map = merchantService.deleteMerchant(this.param_map);
+            Map<String,Object> ret_map = merchantService.deleteMerchant(this.paramMap);
             code = String.valueOf(ret_map.get("code"));
             msg = String.valueOf(ret_map.get("msg"));
         }
@@ -143,6 +143,6 @@ public class MerchantController extends CoreController
             code = Code.FAIL;
             msg = e.getMessage();
         }
-        renderData(code, msg, new HashMap<String,Object>());
+        //renderData(code, msg, new HashMap<String,Object>());
     }
 }
