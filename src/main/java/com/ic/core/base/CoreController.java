@@ -1,4 +1,4 @@
-package com.ic.core.impl;
+package com.ic.core.base;
 
 
 import com.ic.core.enums.LogLevel;
@@ -26,29 +26,7 @@ import java.util.Map;
  */
 public abstract class CoreController implements Serializable {
 
-    /**
-     * 日志对象
-     */
-    protected Logger log = LoggerFactory.getLogger(getClass());
-
-
-    public void debug(String string){
-        if(log.isDebugEnabled()){
-            log.debug(string);
-        }
-    }
-
-    public void info(String string) {
-        if (log.isInfoEnabled()) {
-            log.info(string);
-        }
-    }
-
-    public void error(String string) {
-        if (log.isErrorEnabled()) {
-            log.error(string);
-        }
-    }
+    protected Map<String, Object> paramMap;
 
     /**
      * 客户端返回JSON字符串
