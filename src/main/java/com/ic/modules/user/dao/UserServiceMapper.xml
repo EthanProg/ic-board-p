@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ic.modules.user.dao.UserServiceMapper">
+
+    <select id="getUser" parameterType="map" resultType="map">
+        select * from t_users where user_name = '${userName}'
+    </select>
+
+    <insert id="insertUser" parameterType="map">
+        insert into t_users(user_id,user_name,user_pwd,tel_number,inviter) values('${userId}','${userName}','${userPwd}','${userName}','${inviter}')
+    </insert>
+
+</mapper>
